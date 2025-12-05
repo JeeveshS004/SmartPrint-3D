@@ -25,7 +25,11 @@ export interface Material {
 export interface SplitPlane {
   position: [number, number, number]; // [x, y, z]
   normal: [number, number, number];   // [x, y, z]
-  axis: 'x' | 'y' | 'z' | 'custom';
+  axis: 'x' | 'y' | 'z' | 'custom' | 'auto';
+  visualizationMesh?: {
+    vertices: number[][];
+    faces: number[][];
+  };
 }
 
 export interface FailureIssue {

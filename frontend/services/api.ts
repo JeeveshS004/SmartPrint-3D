@@ -11,17 +11,17 @@ export const api = {
       method: 'POST',
       body: formData,
     });
-    
+
     if (!response.ok) {
       throw new Error(`Upload failed: ${response.statusText}`);
     }
-    
+
     const data = await response.json();
-    return { 
-      success: true, 
+    return {
+      success: true,
       fileId: data.fileId,
       url: data.url,
-      message: 'File uploaded successfully' 
+      message: 'File uploaded successfully'
     };
   },
 
@@ -39,16 +39,17 @@ export const api = {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ fileId })
     });
-    
+
     if (!response.ok) {
       throw new Error(`Split suggestion failed: ${response.statusText}`);
     }
-    
+
     const data = await response.json();
     return {
       position: data.position,
       normal: data.normal,
-      axis: data.axis
+      axis: data.axis,
+      visualizationMesh: data.visualizationMesh
     };
   },
 
@@ -67,7 +68,7 @@ export const api = {
     if (!response.ok) {
       throw new Error(`Split execution failed: ${response.statusText}`);
     }
-    
+
     return await response.json();
   },
 

@@ -16,6 +16,7 @@ interface SidebarProps {
   onFileSelect: (file: File) => void;
   onOpenPrinterModal: () => void;
   onSuggestSplit: () => void;
+  onUndoSplit: () => void;
   onPerformSplit: (withKeys: boolean) => void;
   onModeChange: (mode: AppMode) => void;
   onRunFailureAnalysis: () => void;
@@ -30,6 +31,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   onFileSelect,
   onOpenPrinterModal,
   onSuggestSplit,
+  onUndoSplit,
   onPerformSplit,
   onModeChange,
   onRunFailureAnalysis,
@@ -272,6 +274,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                               <div className="bg-emerald-500/10 border border-emerald-500/20 p-2 rounded-lg flex items-center gap-2">
                                 <CheckCircle className="w-4 h-4 text-emerald-400" />
                                 <span className="text-xs text-emerald-100">Cut Plane Ready</span>
+                                <button onClick={onUndoSplit} className="ml-auto text-[10px] text-zinc-400 hover:text-white underline">Undo</button>
                               </div>
                               <div className="grid grid-cols-2 gap-2">
                                 <Button variant="secondary" onClick={() => onPerformSplit(false)} className="text-xs py-2">
@@ -324,9 +327,15 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
                   {/* DOWNLOAD */}
                   <div className="pt-4 border-t border-white/5">
-                    <button className="w-full flex items-center justify-center gap-2 py-2.5 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white rounded-xl text-xs font-medium transition-colors">
+                    <a
+                      href={activeNode.fileUrl}
+                      download
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full flex items-center justify-center gap-2 py-2.5 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white rounded-xl text-xs font-medium transition-colors"
+                    >
                       <Download className="w-4 h-4" /> Download STL
-                    </button>
+                    </a>
                   </div>
 
                 </div>

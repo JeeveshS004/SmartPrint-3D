@@ -205,6 +205,22 @@ const App: React.FC = () => {
     }
   };
 
+  const handleUndoSplit = () => {
+    const { selectedNodeId } = state;
+    if (!selectedNodeId) return;
+
+    setState(prev => ({
+      ...prev,
+      meshRegistry: {
+        ...prev.meshRegistry,
+        [selectedNodeId]: {
+          ...prev.meshRegistry[selectedNodeId],
+          splitPlane: null
+        }
+      }
+    }));
+  };
+
   const handleSuggestSplit = async () => {
     const { selectedNodeId, meshRegistry, printers } = state;
     if (!selectedNodeId) return;
@@ -374,6 +390,7 @@ const App: React.FC = () => {
         onFileSelect={handleFileSelect}
         onOpenPrinterModal={() => setIsPrinterModalOpen(true)}
         onSuggestSplit={handleSuggestSplit}
+        onUndoSplit={handleUndoSplit}
         onPerformSplit={handlePerformSplit}
         onModeChange={handleModeChange}
         onRunFailureAnalysis={handleRunFailureAnalysis}
